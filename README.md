@@ -1,4 +1,4 @@
-##### Prefer implicit getters on computed properties
+#### Prefer implicit getters on computed properties
 
 When possible, omit the `get` keyword on computed properties that cannot be written to.
 
