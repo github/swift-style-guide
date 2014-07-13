@@ -1,6 +1,8 @@
 ##### Prefer implicit getters on computed properties
 
-Prefer:
+When possible, omit the `get` keyword on computed properties that cannot be written to.
+
+So, do this:
 
 ```swift
 var myGreatProperty: Int {
@@ -8,7 +10,7 @@ var myGreatProperty: Int {
 }
 ```
 
-over:
+… not this:
 
 ```swift
 var myGreatProperty: Int {
