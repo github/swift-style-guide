@@ -1,22 +1,33 @@
-#### Prefer implicit getters on computed properties
+#### Prefer implicit getters on read-only properties and subscripts
 
-When possible, omit the `get` keyword on computed properties that cannot be written to.
+When possible, omit the `get` keyword on read-only computed properties and
+read-only subscripts.
 
-So, do this:
+So, write these:
 
 ```swift
 var myGreatProperty: Int {
 	return 4
 }
+
+subscript(index: Int) -> T {
+    return objects[index]
+}
 ```
 
-… not this:
+… not these:
 
 ```swift
 var myGreatProperty: Int {
 	get {
 		return 4
 	}
+}
+
+subscript(index: Int) -> T {
+    get {
+        return objects[index]
+    }
 }
 ```
 
