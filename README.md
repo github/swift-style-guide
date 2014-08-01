@@ -8,7 +8,7 @@ rough priority order):
  1. Reduced verbosity
  1. Fewer debates about aesthetics
 
-If you have suggestions, please see our [contribution guidelines](CONTRIBUTING.md)
+If you have suggestions, please see our [contribution guidelines](CONTRIBUTING.md),
 then open a pull request. :zap:
 
 ----
