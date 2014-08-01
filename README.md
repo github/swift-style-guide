@@ -1,3 +1,18 @@
+A guide to our Swift style and conventions.
+
+This is an attempt to encourage patterns that accomplish the following goals (in
+rough priority order):
+
+ 1. Increased rigor, and decreased likelihood of programmer error
+ 1. Increased clarity of intent
+ 1. Reduced verbosity
+ 1. Fewer debates about aesthetics
+
+If you have suggestions, please see our [contribution guidelines](CONTRIBUTING.md)
+then open a pull request. :zap:
+
+----
+
 #### Prefer implicit getters on read-only properties and subscripts
 
 When possible, omit the `get` keyword on read-only computed properties and
@@ -83,4 +98,4 @@ extension History {
 }
 ```
 
-_Rationale:_ This makes the capturing semantics of `self` stand out more in closures, and avoids verbosity elsewhere.	
+_Rationale:_ This makes the capturing semantics of `self` stand out more in closures, and avoids verbosity elsewhere.
