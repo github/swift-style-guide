@@ -67,10 +67,14 @@ private class History {
 }
 ```
 
-Only include the explicit keyword when required by the language—for example, in a closure:
+Only include the explicit keyword when required by the language—for example, in a closure, or when parameter names conflict:
 
 ```swift
 extension History {
+	init(events: [Event]) {
+		self.events = events
+	}
+
 	var whenVictorious: () -> () {
 		return {
 			self.rewrite()
