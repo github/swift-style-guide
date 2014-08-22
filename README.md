@@ -13,6 +13,12 @@ then open a pull request. :zap:
 
 ----
 
+#### Whitespace
+
+ * Tabs, not spaces.
+ * End files with a newline.
+ * Make liberal use of vertical whitespace to divide code into logical chunks.
+
 #### Prefer implicit getters on read-only properties and subscripts
 
 When possible, omit the `get` keyword on read-only computed properties and
