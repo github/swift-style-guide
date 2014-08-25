@@ -18,6 +18,9 @@ then open a pull request. :zap:
  * Tabs, not spaces.
  * End files with a newline.
  * Make liberal use of vertical whitespace to divide code into logical chunks.
+ * Don’t leave trailing whitespace.
+   * Not even leading indentation on blank lines.
+
 
 #### Prefer implicit getters on read-only properties and subscripts
 
@@ -73,6 +76,7 @@ internal struct TheFez {
 ```
 
 _Rationale:_ It's rarely appropriate for top-level definitions to be specifically `internal`, and being explicit ensures that careful thought goes into that decision. Within a definition, reusing the same access control specifier is just duplicative, and the default is usually reasonable.
+
 
 #### Only explicitly refer to `self` when required
 
