@@ -21,7 +21,6 @@ then open a pull request. :zap:
  * Don’t leave trailing whitespace.
    * Not even leading indentation on blank lines.
 
-
 #### Prefer implicit getters on read-only properties and subscripts
 
 When possible, omit the `get` keyword on read-only computed properties and
