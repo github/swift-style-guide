@@ -105,3 +105,5 @@ extension History {
 ```
 
 _Rationale:_ This makes the capturing semantics of `self` stand out more in closures, and avoids verbosity elsewhere.
+
+#### Prefer structs over classes
