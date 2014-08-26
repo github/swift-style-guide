@@ -90,6 +90,9 @@ let timeToCoffee: NSTimeInterval = 2
 func makeCoffee(type: CoffeeType) -> Coffee { ... }
 ```
 
+_Rationale:_ The type specifier is saying something about the _identifier_ so 
+it should be positioned with it.
+
 #### Only explicitly refer to `self` when required
 
 When accessing properties or methods on `self`, leave the reference to `self` implicit by default:
