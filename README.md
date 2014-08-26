@@ -77,6 +77,18 @@ internal struct TheFez {
 
 _Rationale:_ It's rarely appropriate for top-level definitions to be specifically `internal`, and being explicit ensures that careful thought goes into that decision. Within a definition, reusing the same access control specifier is just duplicative, and the default is usually reasonable.
 
+#### When specifying a type, always associate the colon with the identifier
+
+When specifying the type of an identifier, always put the colon immediately 
+after the identifier, followed by a space and then the type name.
+
+```swift
+class SmallBatchSustainableFairtrade: Coffee { ... }
+
+let timeToCoffee: NSTimeInterval = 2
+
+func makeCoffee(type: CoffeeType) -> Coffee { ... }
+```
 
 #### Only explicitly refer to `self` when required
 
