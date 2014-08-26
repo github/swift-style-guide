@@ -124,3 +124,5 @@ extension History {
 ```
 
 _Rationale:_ This makes the capturing semantics of `self` stand out more in closures, and avoids verbosity elsewhere.
+
+#### Make as much of a class `final` as possible
