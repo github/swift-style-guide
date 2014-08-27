@@ -181,4 +181,8 @@ struct Car: Vehicle {
 
 _Rationale:_ Value types are simpler, easier to reason about, and behave as expected with the `let` keyword.
 
-#### Make as much of a class `final` as possible
+#### Make classes `final` by default
+
+Classes should start as `final`, and only be changed to allow subclassing if a valid need for inheritance has been identified. Even in that case, as many definitions as possible _within_ the class should be `final` as well, following the same rules.
+
+_Rationale:_ Composition is usually preferable to inheritance, and opting _in_ to inheritance hopefully means that more thought will be put into the decision.
