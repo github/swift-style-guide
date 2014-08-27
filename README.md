@@ -129,7 +129,7 @@ _Rationale:_ This makes the capturing semantics of `self` stand out more in clos
 
 Unless you require functionality that can only be provided by a class (like identity or deinitializers), implement a struct instead.
 
-Note that inheritance is (by itself) usually _not_ a good reason to use classes, because interface reuse can be provided by protocols, and implementation reuse can be provided through composition.
+Note that inheritance is (by itself) usually _not_ a good reason to use classes, because polymorphism can be provided by protocols, and implementation reuse can be provided through composition.
 
 For example, this class hierarchy:
 
