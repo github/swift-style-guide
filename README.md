@@ -79,7 +79,7 @@ _Rationale:_ It's rarely appropriate for top-level definitions to be specificall
 
 #### When specifying a type, always associate the colon with the identifier
 
-When specifying the type of an identifier, always put the colon immediately 
+When specifying the type of an identifier, always put the colon immediately
 after the identifier, followed by a space and then the type name.
 
 ```swift
@@ -90,7 +90,7 @@ let timeToCoffee: NSTimeInterval = 2
 func makeCoffee(type: CoffeeType) -> Coffee { ... }
 ```
 
-_Rationale:_ The type specifier is saying something about the _identifier_ so 
+_Rationale:_ The type specifier is saying something about the _identifier_ so
 it should be positioned with it.
 
 #### Only explicitly refer to `self` when required
@@ -124,5 +124,61 @@ extension History {
 ```
 
 _Rationale:_ This makes the capturing semantics of `self` stand out more in closures, and avoids verbosity elsewhere.
+
+#### Prefer structs over classes
+
+Unless you require functionality that can only be provided by a class (like identity or deinitializers), implement a struct instead.
+
+Note that inheritance is (by itself) usually _not_ a good reason to use classes, because polymorphism can be provided by protocols, and implementation reuse can be provided through composition.
+
+For example, this class hierarchy:
+
+```swift
+class Vehicle {
+    let numberOfWheels: Int
+
+    init(numberOfWheels: Int) {
+        self.numberOfWheels = numberOfWheels;
+    }
+
+    func maximumTotalTirePressure(pressurePerWheel: Float) -> Float {
+        return pressurePerWheel * numberOfWheels
+    }
+}
+
+class Bicycle: Vehicle {
+    init() {
+        super.init(numberOfWheels: 2)
+    }
+}
+
+class Car: Vehicle {
+    init() {
+        super.init(numberOfWheels: 4)
+    }
+}
+```
+
+could be refactored into these definitions:
+
+```swift
+protocol Vehicle {
+    var numberOfWheels: Int { get }
+}
+
+func maximumTotalTirePressure(vehicle: Vehicle, pressurePerWheel: Float) -> Float {
+    return pressurePerWheel * vehicle.numberOfWheels
+}
+
+struct Bicycle: Vehicle {
+    let numberOfWheels = 2
+}
+
+struct Car: Vehicle {
+    let numberOfWheels = 4
+}
+```
+
+_Rationale:_ Value types are simpler, easier to reason about, and behave as expected with the `let` keyword.
 
 #### Make as much of a class `final` as possible
