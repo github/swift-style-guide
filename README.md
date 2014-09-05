@@ -187,9 +187,9 @@ Classes should start as `final`, and only be changed to allow subclassing if a v
 
 _Rationale:_ Composition is usually preferable to inheritance, and opting _in_ to inheritance hopefully means that more thought will be put into the decision.
 
-#### Pass short inline closures after function arguments
+#### Use trailing closure syntax for short closures
 
-When you need to pass a short closure (upto about 5 lines) place it after the function parenthesis when possible (when it is the last function argument):
+When you need to pass a short closure (up to about 5 lines) place it after the function parenthesis when possible (when it is the last function argument):
 
 ```swift
 let newArray = map([1,2,3]) {
@@ -197,7 +197,7 @@ let newArray = map([1,2,3]) {
 	}
 ```
 
-_Rationale:_ Prevents making the closing of the function argument hard to read and avoid the need to explitly give the argument name.
+_Rationale:_ Prevents making the closing of the function argument hard to read and avoid the need to explicitly give the argument name.
 
 #### Long closures should not be inlined
 
@@ -207,7 +207,8 @@ When you need to pass a closure longer than about 5 lines define it (optionally 
 let verifyAndSaveDownloadedData = { 
 	// Numerous lines of code...
 }
-let newArray = dispatch_async(DISPATCH_QUEUE_BACKGROUND, block: verifyAndSaveDownloadedData)
+dispatch_async(DISPATCH_QUEUE_BACKGROUND, block: verifyAndSaveDownloadedData)
 ```
+This approach is also valuable even with short closures if they are needed in multiple places.
 
 _Rationale:_ By naming the closure or function the intent of the function call using it can be understood without the whole code being analysed.
