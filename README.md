@@ -186,3 +186,28 @@ _Rationale:_ Value types are simpler, easier to reason about, and behave as expe
 Classes should start as `final`, and only be changed to allow subclassing if a valid need for inheritance has been identified. Even in that case, as many definitions as possible _within_ the class should be `final` as well, following the same rules.
 
 _Rationale:_ Composition is usually preferable to inheritance, and opting _in_ to inheritance hopefully means that more thought will be put into the decision.
+
+#### Pass short inline closures after function arguments
+
+When you need to pass a short closure (upto about 5 lines) place it after the function parenthesis when possible (when it is the last function argument):
+
+```swift
+let newArray = map([1,2,3]) {
+		$0 * 3 - 1
+	}
+```
+
+_Rationale:_ Prevents making the closing of the function argument hard to read and avoid the need to explitly give the argument name.
+
+#### Long closures should not be inlined
+
+When you need to pass a closure longer than about 5 lines define it (optionally as a function) and then pass that:
+
+```swift
+let verifyAndSaveDownloadedData = { 
+	// Numerous lines of code...
+}
+let newArray = dispatch_async(DISPATCH_QUEUE_BACKGROUND, block: verifyAndSaveDownloadedData)
+```
+
+_Rationale:_ By naming the closure or function the intent of the function call using it can be understood without the whole code being analysed.
