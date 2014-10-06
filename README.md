@@ -186,3 +186,30 @@ _Rationale:_ Value types are simpler, easier to reason about, and behave as expe
 Classes should start as `final`, and only be changed to allow subclassing if a valid need for inheritance has been identified. Even in that case, as many definitions as possible _within_ the class should be `final` as well, following the same rules.
 
 _Rationale:_ Composition is usually preferable to inheritance, and opting _in_ to inheritance hopefully means that more thought will be put into the decision.
+
+
+#### Omit type parameters where possible
+
+Methods of parameterized types can omit type parameters on the receiving type when they’re identical to the receiver’s. For example:
+
+```swift
+struct Composite<T> {
+	…
+	func compose(other: Composite<T>) -> Composite<T> {
+		return Composite<T>(self, other)
+	}
+}
+```
+
+could be rendered as:
+
+```swift
+struct Composite<T> {
+	…
+	func compose(other: Composite) -> Composite {
+		return Composite(self, other)
+	}
+}
+```
+
+_Rationale:_ Omitting redundant type parameters clarifies the intent, and makes it obvious by contrast when the returned type takes different type parameters.
