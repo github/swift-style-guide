@@ -213,3 +213,19 @@ struct Composite<T> {
 ```
 
 _Rationale:_ Omitting redundant type parameters clarifies the intent, and makes it obvious by contrast when the returned type takes different type parameters.
+
+#### Always use `let` for `case` statements
+
+In `case` statements, always destructure values using `let`, even if there are no arguments:
+
+```swift
+switch (someOptional) {
+case let .Some(value):
+	println(value)
+
+case let .None:
+	println("No value")
+}
+```
+
+_Rationale:_ This ensures consistency between cases, makes it easy to change the pattern matching later, and avoids mutable variables.
