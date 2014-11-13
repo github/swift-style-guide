@@ -1,5 +1,3 @@
-[中文版](https://github.com/Artwalk/swift-style-guide/blob/master/README_CN.md)
-
 A guide to our Swift style and conventions.
 
 This is an attempt to encourage patterns that accomplish the following goals (in
@@ -215,3 +213,5 @@ struct Composite<T> {
 ```
 
 _Rationale:_ Omitting redundant type parameters clarifies the intent, and makes it obvious by contrast when the returned type takes different type parameters.
+
+[中文版](https://github.com/Artwalk/swift-style-guide/blob/master/README_CN.md)
