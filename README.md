@@ -1,3 +1,5 @@
+[中文版](https://github.com/Artwalk/swift-style-guide/blob/master/README_CN.md)
+
 A guide to our Swift style and conventions.
 
 This is an attempt to encourage patterns that accomplish the following goals (in
