@@ -214,4 +214,6 @@ struct Composite<T> {
 
 _Rationale:_ Omitting redundant type parameters clarifies the intent, and makes it obvious by contrast when the returned type takes different type parameters.
 
+--
+
 [中文版](https://github.com/Artwalk/swift-style-guide/blob/master/README_CN.md)
