@@ -231,4 +231,4 @@ func <| (lhs: Int, rhs: Int) -> Int
 func <|< <A>(lhs: A, rhs: A) -> A
 ```
 
-_Rationale:_ Operators consist of punctuation characters, which can make them difficult to parse visually when followed by the punctuation surrounding type/value parameter lists. Especially with type parameters, this can make the difference between readable and un-.
+_Rationale:_ Operators consist of punctuation characters, which can make them difficult to read when immediately followed by the punctuation for a type or value parameter list. Adding whitespace separates the two more clearly.
