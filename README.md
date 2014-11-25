@@ -22,6 +22,18 @@ then open a pull request. :zap:
    * Not even leading indentation on blank lines.
 
 
+#### Prefer `let`-bindings over `var`-bindings wherever possible
+
+Use `let foo = …` over `var foo = …` wherever possible (and when in doubt). Only use `var` if you absolutely have to (i.e. you *know* that the value might change, e.g. when using the `weak` storage modifier).
+
+_Rationale:_ The intent and meaning of both keywords is clear, but *let-by-default* results in safer and clearer code.
+
+A `let`-binding guarantees and *clearly signals to the programmer* that its value is supposed to and will never change. Subsequent code can thus make stronger assumptions about its usage.
+
+It becomes easier to reason about code. Had you used `var` while still making the assumption that the value never changed, you would have to manually check that.
+
+Accordingly, whenever you see a `var` identifier being used, assume that it will change and ask yourself why.
+
 #### Prefer implicit getters on read-only properties and subscripts
 
 When possible, omit the `get` keyword on read-only computed properties and
