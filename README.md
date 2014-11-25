@@ -34,6 +34,14 @@ It becomes easier to reason about code. Had you used `var` while still making th
 
 Accordingly, whenever you see a `var` identifier being used, assume that it will change and ask yourself why.
 
+#### Don't use Implicitly Unwrapped Optionals
+
+Use `let foo: FooType?` instead of `let foo: FooType!` if foo may be nil.
+
+You should not ever *have* to use the exclamation mark `!` in your Swift code (i.e. it can always be replaced with `?`).
+
+_Rationale:_ Explicit optionals result in safer code. Implicitly unwrapped optionals easily lead to runtime crashes.
+
 #### Prefer implicit getters on read-only properties and subscripts
 
 When possible, omit the `get` keyword on read-only computed properties and
