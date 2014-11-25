@@ -34,6 +34,32 @@ It becomes easier to reason about code. Had you used `var` while still making th
 
 Accordingly, whenever you see a `var` identifier being used, assume that it will change and ask yourself why.
 
+#### Prefer `as?` over `as` when Type Casting
+
+Ideally, you should keep your type casts to a minimum. When you absolutely do have to cast, prefer to use the optional form of the type cast operator (`as?`) over the regular type cast operator (`as`).
+Casts may fail, even if you don't think they should. If an `as` cast fails, you will see a crash at runtime. If you use `as?` instead you can guard against this.
+
+For example, do this:
+
+```swift
+// `foo` is an identifier that we think might be bound to an `Int`
+if let foo = foo as? Int {
+	// Do something with `foo`, which is of type `Int` here.
+} else {
+	// If appropriate, handle cast failure here
+}
+```
+
+… instead of this:
+
+```swift
+// `foo` is an identifier that we think might be bound to an `Int`.
+// The following line will crash at runtime if `foo` is not, in fact, an `Int`.
+let myInt = foo as Int
+```
+
+_Rationale:_ The intent and meaning of both operators is clear, but the optional form results in safer code.
+
 #### Prefer implicit getters on read-only properties and subscripts
 
 When possible, omit the `get` keyword on read-only computed properties and
