@@ -34,12 +34,11 @@ It becomes easier to reason about code. Had you used `var` while still making th
 
 Accordingly, whenever you see a `var` identifier being used, assume that it will change and ask yourself why.
 
-#### Don't use Force-Unwrapping of Optionals
+#### Avoid Using Force-Unwrapping of Optionals
 
-If you have an identifier `foo` of type `FooType?` or `FooType!`, prefer not to force-unwrap it to get to the underlying value,
-i.e. don't do `foo!`.
+If you have an identifier `foo` of type `FooType?` or `FooType!`, don't force-unwrap it to get to the underlying value (`foo!`) if possible.
 
-Instead, do this:
+Instead, prefer this:
 
 ```swift
 if let foo = foo {
@@ -56,7 +55,7 @@ Alternatively, you might want to use Swift's Optional Chaining in some of these 
 foo?.callSomethingIfFooIsNotNil()
 ```
 
-_Rationale:_ Explicit `if let`-binding of optionals results in safer code. Force unwrapping easily leads to runtime crashes.
+_Rationale:_ Explicit `if let`-binding of optionals results in safer code. Force unwrapping is more prone to lead to runtime crashes.
 
 #### Prefer implicit getters on read-only properties and subscripts
 
