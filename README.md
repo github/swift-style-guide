@@ -11,7 +11,6 @@ rough priority order):
 If you have suggestions, please see our [contribution guidelines](CONTRIBUTING.md),
 then open a pull request. :zap:
 
-----
 
 #### Whitespace
 
@@ -56,6 +55,12 @@ foo?.callSomethingIfFooIsNotNil()
 ```
 
 _Rationale:_ Explicit `if let`-binding of optionals results in safer code. Force unwrapping is more prone to lead to runtime crashes.
+
+#### Avoid Using Implicitly Unwrapped Optionals
+
+Where possible, use `let foo: FooType?` instead of `let foo: FooType!` if foo may be nil (Note that in general, `?` can be used instead of `!`).
+
+_Rationale:_ Explicit optionals result in safer code. Implicitly unwrapped optionals have the potential of crashing at runtime.
 
 #### Prefer implicit getters on read-only properties and subscripts
 
