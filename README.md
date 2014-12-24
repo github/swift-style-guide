@@ -179,7 +179,7 @@ class Vehicle {
     let numberOfWheels: Int
 
     init(numberOfWheels: Int) {
-        self.numberOfWheels = numberOfWheels;
+        self.numberOfWheels = numberOfWheels
     }
 
     func maximumTotalTirePressure(pressurePerWheel: Float) -> Float {
