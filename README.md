@@ -134,9 +134,7 @@ func makeCoffee(type: CoffeeType) -> Coffee { ... }
 _Rationale:_ The type specifier is saying something about the _identifier_ so
 it should be positioned with it.
 
-#### When declaring a dictionary type, always associate the colon with the key
-
-When specifying the type of a dictionary, always put the colon immediately
+Also, when specifying the type of a dictionary, always put the colon immediately
 after the key type, followed by a space and then the value type.
 
 ```swift
