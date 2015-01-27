@@ -104,7 +104,6 @@ When type information can be inferred from an initial value, avoid declaring it 
 
 ```swift
 var isOnFire = false
-var lookupTable = [String: Int]()
 var referenceFrame = CGRect(x: 0, y: 0, width: 100, height: 100)
 ```
 
@@ -112,11 +111,23 @@ instead of:
 
 ```swift
 var isOnFire: Bool = false
-var lookupTable: [String: Int] = [String: Int]()
 var referenceFrame: CGRect = CGRect(x: 0, y: 0, width: 100, height: 100)
 ```
 
-_Rationale_: using implicit type information results in shorter, easier to read code. 
+When type information _cannot_ be inferred from an initial value then it should be explicitly added to the declaration; you should not add type information to a constructor for the purpose of allowing type inference.
+
+```swift
+var lookupTable: [Int: String] = [:] 
+var duration: NSTimeInterval = 1.2
+```
+
+instead of:
+
+```swift
+var lookupTable = [Int: String]()
+var duration = NSTimeInterval(1.2)
+```
+_Rationale_: Using implicit type information results in shorter, easier to read code. 
 
 #### Always specify access control explicitly for top-level definitions
 
