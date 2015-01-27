@@ -98,6 +98,26 @@ subscript(index: Int) -> T {
 
 _Rationale:_ The intent and meaning of the first version is clear, and results in less code.
 
+#### Avoid redundant type declarations.
+
+When type information can be inferred from an initial value, avoid declaring it explicitly, unless doing so is an active decision to improve code legibility.
+
+```swift
+var isOnFire = false  // implicit Bool
+var lookupTable = [String: Int]() // implicit Dictionary<String: Int>
+var referenceFrame = CGRect(x: 0, y: 0, width: 100, height: 100) //implicit CGRect
+```
+
+instead of:
+
+```swift
+var isOnFire: Bool = false
+var lookupTable: [String: Int] = [String: Int]()
+var referenceFrame: CGRect = CGRect(x: 0, y: 0, width: 100, height: 100)
+```
+
+_Rationale_: using implicit type information results in shorter, easier to read code. 
+
 #### Always specify access control explicitly for top-level definitions
 
 Top-level functions, types, and variables should always have explicit access control specifiers:
