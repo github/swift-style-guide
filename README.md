@@ -103,9 +103,9 @@ _Rationale:_ The intent and meaning of the first version is clear, and results i
 When type information can be inferred from an initial value, avoid declaring it explicitly, unless doing so is an active decision to improve code legibility.
 
 ```swift
-var isOnFire = false  // implicit Bool
-var lookupTable = [String: Int]() // implicit Dictionary<String: Int>
-var referenceFrame = CGRect(x: 0, y: 0, width: 100, height: 100) //implicit CGRect
+var isOnFire = false
+var lookupTable = [String: Int]()
+var referenceFrame = CGRect(x: 0, y: 0, width: 100, height: 100)
 ```
 
 instead of:
