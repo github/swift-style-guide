@@ -127,7 +127,7 @@ instead of:
 var lookupTable = [Int: String]()
 var duration = NSTimeInterval(1.2)
 ```
-_Rationale_: Using implicit type information results in shorter, easier to read code. 
+_Rationale_: Avoiding redundant declarations results in shorter, easier to read code. 
 
 #### Always specify access control explicitly for top-level definitions
 
