@@ -98,7 +98,7 @@ subscript(index: Int) -> T {
 
 _Rationale:_ The intent and meaning of the first version is clear, and results in less code.
 
-#### Avoid redundant type declarations.
+#### Avoid redundant type declarations
 
 When type information can be inferred from an initial value, avoid declaring it explicitly, unless doing so is an active decision to improve code legibility.
 
