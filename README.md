@@ -59,7 +59,7 @@ _Rationale:_ Explicit `if let`-binding of optionals results in safer code. Force
 
 #### Avoid Using Implicitly Unwrapped Optionals
 
-Where possible, use `let foo: FooType?` instead of `let foo: FooType!` if foo may be nil (Note that in general, `?` can be used instead of `!`).
+Where possible, use `let foo: FooType?` instead of `let foo: FooType!` if `foo` may be nil (Note that in general, `?` can be used instead of `!`).
 
 _Rationale:_ Explicit optionals result in safer code. Implicitly unwrapped optionals have the potential of crashing at runtime.
 
