@@ -283,3 +283,4 @@ _Rationale:_ Operators consist of punctuation characters, which can make them di
 #### Translations
 
 * [中文版](https://github.com/Artwalk/swift-style-guide/blob/master/README_CN.md)
+* [日本語版](https://github.com/morizotter/swift-style-guide)
