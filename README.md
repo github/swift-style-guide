@@ -17,7 +17,13 @@ rough priority order):
  1. Increased clarity of intent
  1. Aesthetic consistency
 
-#### Whitespace
+###Table Of Contents
+
+* [Whitespace](#whitespace)
+* [Code Grouping](#code-crouping)
+* [Let vs Var](#let-vs-var)
+
+####Whitespace
 
  * Tabs, not spaces.
  * End files with a newline.
@@ -25,8 +31,33 @@ rough priority order):
  * Don’t leave trailing whitespace.
    * Not even leading indentation on blank lines.
 
+####Code Grouping
 
-#### Prefer `let`-bindings over `var`-bindings wherever possible
+Code should strive to be separated into meaningful chunks of functionality.  These larger chunks should be indicated by using the `// MARK: ` keyword.
+
+When grouping protocol conformance, always use the name of the protocol and only the name of the protocol
+
+**For Example:**
+
+```Swift
+// MARK: UITableViewDelegate
+```
+
+**Not**
+
+```Swift
+// MARK: UITableViewDelegate Methods
+```
+
+-- or --
+
+```Swift
+// MARK: Table View Delegate
+```
+
+####Let vs Var
+
+Prefer `let`-bindings over `var`-bindings wherever possible
 
 Use `let foo = …` over `var foo = …` wherever possible (and when in doubt). Only use `var` if you absolutely have to (i.e. you *know* that the value might change, e.g. when using the `weak` storage modifier).
 
