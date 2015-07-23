@@ -25,7 +25,7 @@ rough priority order):
 * [Force-Unwrapping of Optionals](#force-unwrapping-of-optionals)
 * [Implicitly Unwrapped Optionals](#implicitly-unwrapped-optionals)
 * [Getters](#getters)
-
+* [Access Control](#access-control)
 
 ####Whitespace
 
@@ -85,13 +85,6 @@ if let foo = foo {
 } else {
     // If appropriate, handle the case where the optional is nil
 }
-```
-
-Alternatively, you might want to use Swift's Optional Chaining in some of these cases, such as:
-
-```swift
-// Call the function if `foo` is not nil. If `foo` is nil, ignore we ever tried to make the call
-foo?.callSomethingIfFooIsNotNil()
 ```
 
 When dealing with `weak` or optional delegates, optional binding syntax is always preferable unless functionality is dependent on that value being unwrapped.
@@ -161,7 +154,7 @@ subscript(index: Int) -> T {
 
 _Rationale:_ The intent and meaning of the first version is clear, and results in less code.
 
-#### Always specify access control explicitly for top-level definitions
+####Access Control
 
 Top-level functions, types, and variables should always have explicit access control specifiers:
 
@@ -177,6 +170,20 @@ However, definitions within those can leave access control implicit, where appro
 internal struct TheFez {
 	var owner: Person = Joshaber()
 }
+```
+
+When dealing with functionality that relies on ObjC systems such as the target-selector pattern, one should still strive for appropriate access control.  This can be achieved through the `@objC` attribute.  
+
+**For Example:**
+
+```Swift
+@objc private func handleTap(tap: UITapGestureRecognizer)
+```
+
+**Not**
+
+```Swift
+public func handleTap(tap: UITapGestureRecognizer)
 ```
 
 _Rationale:_ It's rarely appropriate for top-level definitions to be specifically `internal`, and being explicit ensures that careful thought goes into that decision. Within a definition, reusing the same access control specifier is just duplicative, and the default is usually reasonable.
