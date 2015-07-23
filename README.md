@@ -1,18 +1,22 @@
-A guide to our Swift style and conventions.
+#Intrepid Pursuits
+##Swift Style Guide
+
+This is the initial documentation of Intrepid best practices and style regarding the Swift language.
+
+###Making / Requesting Changes
+
+Feedback and change are encouraged!  The current maintainers of this style guide are @brightredchili and @loganwright.  If you have an issue with any of the existing rules and would like to see something changed, please see the [contribution guidelines](CONTRIBUTING.md),
+then open a pull request. :zap:
+
+###Goals
 
 This is an attempt to encourage patterns that accomplish the following goals (in
 rough priority order):
 
  1. Increased rigor, and decreased likelihood of programmer error
  1. Increased clarity of intent
- 1. Reduced verbosity
- 1. Fewer debates about aesthetics
-
-If you have suggestions, please see our [contribution guidelines](CONTRIBUTING.md),
-then open a pull request. :zap:
-
-----
-
+ 1. Aesthetic consistency
+ 
 #### Whitespace
 
  * Tabs, not spaces.
