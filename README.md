@@ -22,6 +22,10 @@ rough priority order):
 * [Whitespace](#whitespace)
 * [Code Grouping](#code-crouping)
 * [Let vs Var](#let-vs-var)
+* [Force-Unwrapping of Optionals](#force-unwrapping-of-optionals)
+* [Implicitly Unwrapped Optionals](#implicitly-unwrapped-optionals)
+* [Getters](#getters)
+
 
 ####Whitespace
 
@@ -69,7 +73,7 @@ It becomes easier to reason about code. Had you used `var` while still making th
 
 Accordingly, whenever you see a `var` identifier being used, assume that it will change and ask yourself why.
 
-#### Avoid Using Force-Unwrapping of Optionals
+#### Force-Unwrapping of Optionals
 
 If you have an identifier `foo` of type `FooType?` or `FooType!`, don't force-unwrap it to get to the underlying value (`foo!`) if possible.
 
@@ -90,15 +94,39 @@ Alternatively, you might want to use Swift's Optional Chaining in some of these 
 foo?.callSomethingIfFooIsNotNil()
 ```
 
+When dealing with `weak` or optional delegates, optional binding syntax is always preferable unless functionality is dependent on that value being unwrapped.
+
+**For Example:**
+
+```Swift
+delegate?.doSomething(self)
+```
+
+**Not**
+
+```Swift
+if let delegate = self.delegate {
+  delegate.doSomething(self)
+}
+```
+
 _Rationale:_ Explicit `if let`-binding of optionals results in safer code. Force unwrapping is more prone to lead to runtime crashes.
 
-#### Avoid Using Implicitly Unwrapped Optionals
+####Implicitly Unwrapped Optionals
 
-Where possible, use `let foo: FooType?` instead of `let foo: FooType!` if `foo` may be nil (Note that in general, `?` can be used instead of `!`).
+Implicitly unwrapped optionals have the potential to cause runtime crashes and should be used carefully. If a variable has the possibility of being `nil`, you should always declare it as an optional `?`.
+
+Implicitly unwrapped optionals may be used in situations where limitations prevent the use of a non-optional type, but will never be accessed without a value.
+
+If a variable is dependent on `self` and thus not settable during initialization, consider using a `lazy` variable.
+
+```Swift
+lazy var customObject: CustomObject = CustomObject(dataSource: self)
+```
 
 _Rationale:_ Explicit optionals result in safer code. Implicitly unwrapped optionals have the potential of crashing at runtime.
 
-#### Prefer implicit getters on read-only properties and subscripts
+####Getters
 
 When possible, omit the `get` keyword on read-only computed properties and
 read-only subscripts.
