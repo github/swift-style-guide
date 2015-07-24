@@ -26,6 +26,7 @@ rough priority order):
 * [Implicitly Unwrapped Optionals](#implicitly-unwrapped-optionals)
 * [Getters](#getters)
 * [Access Control](#access-control)
+* [Type Specifications](#type-specification)
 
 ####Whitespace
 
@@ -188,7 +189,7 @@ public func handleTap(tap: UITapGestureRecognizer)
 
 _Rationale:_ It's rarely appropriate for top-level definitions to be specifically `internal`, and being explicit ensures that careful thought goes into that decision. Within a definition, reusing the same access control specifier is just duplicative, and the default is usually reasonable.
 
-#### When specifying a type, always associate the colon with the identifier
+####Type Specifications
 
 When specifying the type of an identifier, always put the colon immediately
 after the identifier, followed by a space and then the type name.
@@ -199,6 +200,55 @@ class SmallBatchSustainableFairtrade: Coffee { ... }
 let timeToCoffee: NSTimeInterval = 2
 
 func makeCoffee(type: CoffeeType) -> Coffee { ... }
+
+func swap<T: Swappable>(inout a: T, inout b: T) { ... }
+```
+
+#####Closure Specifications
+
+It is preferable to associate a closure's type from the left hand side when possible.
+
+ **For example:**
+
+ ```Swift
+ let layout: (UIView, UIView) -> Void = { view1, view2 in
+   view1.center = view2.center
+   // ...
+ }
+ ```
+
+ **Not**
+
+```Swift
+let layout = { (view1: UIView, view2: UIView) in
+  view1.center = view2.center
+  // ...
+}
+```
+
+#####Type Inference
+
+Unless it impairs readability or understanding, it preferable to rely on Swift's type inference where appropriate.
+
+**For example:**
+
+```Swift
+let hello = "Hello"
+```
+
+**Not**
+
+```Swift
+let hello: String = "Hello"
+```
+
+This does not mean one should avoid those situations where an explicit type is required.
+
+**For example:**
+
+```Swift
+let padding: CGFloat = 20
+var hello: String? = "Hello"
 ```
 
 _Rationale:_ The type specifier is saying something about the _identifier_ so
@@ -211,7 +261,7 @@ after the key type, followed by a space and then the value type.
 let capitals: [Country: City] = [ Sweden: Stockholm ]
 ```
 
-#### Only explicitly refer to `self` when required
+####Referring to `self`
 
 When accessing properties or methods on `self`, leave the reference to `self` implicit by default:
 
