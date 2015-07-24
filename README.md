@@ -30,6 +30,8 @@ rough priority order):
 * [Referring to self](#referring-to-self)
 * [Structs vs Classes](#structs-vs-classes)
 * [Parameterized Types](#parameterized-types)
+* [Operator Definitions](#operator-definitions)
+* [Functions](#functions)
 
 ####Whitespace
 
@@ -388,7 +390,7 @@ struct Composite<T> {
 
 _Rationale:_ Omitting redundant type parameters clarifies the intent, and makes it obvious by contrast when the returned type takes different type parameters.
 
-#### Use whitespace around operator definitions
+####Operator Definitions
 
 Use whitespace around operators when defining them.
 
@@ -407,3 +409,66 @@ func <|<<A>(lhs: A, rhs: A) -> A
 ```
 
 _Rationale:_ Operators consist of punctuation characters, which can make them difficult to read when immediately followed by the punctuation for a type or value parameter list. Adding whitespace separates the two more clearly.
+
+####Functions
+
+Specifications around the preferable syntax to use when declaring, and using functions.
+
+#####Declarations
+
+When declaring a function, external parameters are always preferable.  Functions that don't include the first argument in the name should declare a first argument explicitly.
+
+**For example:**
+
+```Swift
+func moveView(view: UIView, toFrame frame: CGRect)
+```
+
+**Not**
+
+```Swift
+func move(view: UIView, _ frame: CGRect)
+```
+
+#####Calling
+
+... some specifications on calling functions
+
+- Avoid declaring large arguments inline
+- For functions with many argument, specify each arg on new line and `)` on final line
+- Use trailing closure syntax for simple functions
+- Avoid trailing closures at the end of functions with many arguments.  (3+)?
+
+
+####Closures
+
+Shorthand argument syntax should only be used in closures that can be understood in a few lines.  In other situations, declaring a variable that helps identify the underlying value is preferred.
+
+**For example:**
+
+```Swift
+doSomethingWithCompletion() { result in
+  // do things with result
+  switch result {
+    // ...
+  }
+}
+```
+
+**Not**
+
+```Swift
+doSomethingWithCompletion() {
+  // do things with result
+  switch $0 {
+    // ...
+  }
+}
+```
+
+Using shorthand syntax is preferable in situations where the arguments are well understood and can be expressed in a few lines.
+
+
+```Swift
+let sortedNames = names.sort { $0 < $1 }
+```
