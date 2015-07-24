@@ -29,6 +29,7 @@ rough priority order):
 * [Type Specifications](#type-specification)
 * [Referring to self](#referring-to-self)
 * [Structs vs Classes](#structs-vs-classes)
+* [Parameterized Types](#parameterized-types)
 
 ####Whitespace
 
@@ -359,21 +360,11 @@ Classes should start as `final`, and only be changed to allow subclassing if a v
 
 _Rationale:_ Composition is usually preferable to inheritance, and opting _in_ to inheritance hopefully means that more thought will be put into the decision.
 
+####Parameterized Types
 
-#### Omit type parameters where possible
+Methods of parameterized types can omit type parameters on the receiving type when they’re identical to the receiver’s.
 
-Methods of parameterized types can omit type parameters on the receiving type when they’re identical to the receiver’s. For example:
-
-```swift
-struct Composite<T> {
-	…
-	func compose(other: Composite<T>) -> Composite<T> {
-		return Composite<T>(self, other)
-	}
-}
-```
-
-could be rendered as:
+**For example:**
 
 ```swift
 struct Composite<T> {
@@ -384,22 +375,35 @@ struct Composite<T> {
 }
 ```
 
+**Not**
+
+```swift
+struct Composite<T> {
+	…
+	func compose(other: Composite<T>) -> Composite<T> {
+		return Composite<T>(self, other)
+	}
+}
+```
+
 _Rationale:_ Omitting redundant type parameters clarifies the intent, and makes it obvious by contrast when the returned type takes different type parameters.
 
 #### Use whitespace around operator definitions
 
-Use whitespace around operators when defining them. Instead of:
+Use whitespace around operators when defining them.
 
-```swift
-func <|(lhs: Int, rhs: Int) -> Int
-func <|<<A>(lhs: A, rhs: A) -> A
-```
-
-write:
+**For example:**
 
 ```swift
 func <| (lhs: Int, rhs: Int) -> Int
 func <|< <A>(lhs: A, rhs: A) -> A
+```
+
+**Not**
+
+```swift
+func <|(lhs: Int, rhs: Int) -> Int
+func <|<<A>(lhs: A, rhs: A) -> A
 ```
 
 _Rationale:_ Operators consist of punctuation characters, which can make them difficult to read when immediately followed by the punctuation for a type or value parameter list. Adding whitespace separates the two more clearly.
