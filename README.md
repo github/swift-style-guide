@@ -27,6 +27,8 @@ rough priority order):
 * [Getters](#getters)
 * [Access Control](#access-control)
 * [Type Specifications](#type-specification)
+* [Referring to self](#referring-to-self)
+* [Structs vs Classes](#structs-vs-classes)
 
 ####Whitespace
 
@@ -293,7 +295,7 @@ extension History {
 
 _Rationale:_ This makes the capturing semantics of `self` stand out more in closures, and avoids verbosity elsewhere.
 
-#### Prefer structs over classes
+####Structs vs Classes
 
 Unless you require functionality that can only be provided by a class (like identity or deinitializers), implement a struct instead.
 
@@ -334,8 +336,10 @@ protocol Vehicle {
     var numberOfWheels: Int { get }
 }
 
-func maximumTotalTirePressure(vehicle: Vehicle, pressurePerWheel: Float) -> Float {
-    return pressurePerWheel * Float(vehicle.numberOfWheels)
+extension Vehicle {
+    func maximumTotalTirePressure(pressurePerWheel: Float) -> Float {
+        return pressurePerWheel * Float(numberOfWheels)
+    }  
 }
 
 struct Bicycle: Vehicle {
