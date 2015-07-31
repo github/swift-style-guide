@@ -1,19 +1,39 @@
-A guide to our Swift style and conventions.
+#Intrepid Pursuits
+##Swift Style Guide
+
+This is the initial documentation of Intrepid best practices and style regarding the Swift language.
+
+###Making / Requesting Changes
+
+Feedback and change are encouraged!  The current maintainers of this style guide are @brightredchili and @loganwright.  If you have an issue with any of the existing rules and would like to see something changed, please see the [contribution guidelines](CONTRIBUTING.md),
+then open a pull request. :zap:
+
+###Goals
 
 This is an attempt to encourage patterns that accomplish the following goals (in
 rough priority order):
 
  1. Increased rigor, and decreased likelihood of programmer error
  1. Increased clarity of intent
- 1. Reduced verbosity
- 1. Fewer debates about aesthetics
+ 1. Aesthetic consistency
 
-If you have suggestions, please see our [contribution guidelines](CONTRIBUTING.md),
-then open a pull request. :zap:
+###Table Of Contents
 
-----
+* [Whitespace](#whitespace)
+* [Code Grouping](#code-crouping)
+* [Let vs Var](#let-vs-var)
+* [Force-Unwrapping of Optionals](#force-unwrapping-of-optionals)
+* [Implicitly Unwrapped Optionals](#implicitly-unwrapped-optionals)
+* [Getters](#getters)
+* [Access Control](#access-control)
+* [Type Specifications](#type-specification)
+* [Referring to self](#referring-to-self)
+* [Structs vs Classes](#structs-vs-classes)
+* [Parameterized Types](#parameterized-types)
+* [Operator Definitions](#operator-definitions)
+* [Functions](#functions)
 
-#### Whitespace
+####Whitespace
 
  * Tabs, not spaces.
  * End files with a newline.
@@ -21,8 +41,33 @@ then open a pull request. :zap:
  * Don’t leave trailing whitespace.
    * Not even leading indentation on blank lines.
 
+####Code Grouping
 
-#### Prefer `let`-bindings over `var`-bindings wherever possible
+Code should strive to be separated into meaningful chunks of functionality.  These larger chunks should be indicated by using the `// MARK: ` keyword.
+
+When grouping protocol conformance, always use the name of the protocol and only the name of the protocol
+
+**For Example:**
+
+```Swift
+// MARK: UITableViewDelegate
+```
+
+**Not**
+
+```Swift
+// MARK: UITableViewDelegate Methods
+```
+
+-- or --
+
+```Swift
+// MARK: Table View Delegate
+```
+
+####Let vs Var
+
+Prefer `let`-bindings over `var`-bindings wherever possible
 
 Use `let foo = …` over `var foo = …` wherever possible (and when in doubt). Only use `var` if you absolutely have to (i.e. you *know* that the value might change, e.g. when using the `weak` storage modifier).
 
@@ -34,7 +79,7 @@ It becomes easier to reason about code. Had you used `var` while still making th
 
 Accordingly, whenever you see a `var` identifier being used, assume that it will change and ask yourself why.
 
-#### Avoid Using Force-Unwrapping of Optionals
+#### Force-Unwrapping of Optionals
 
 If you have an identifier `foo` of type `FooType?` or `FooType!`, don't force-unwrap it to get to the underlying value (`foo!`) if possible.
 
@@ -48,22 +93,23 @@ if let foo = foo {
 }
 ```
 
-Alternatively, you might want to use Swift's Optional Chaining in some of these cases, such as:
-
-```swift
-// Call the function if `foo` is not nil. If `foo` is nil, ignore we ever tried to make the call
-foo?.callSomethingIfFooIsNotNil()
-```
-
 _Rationale:_ Explicit `if let`-binding of optionals results in safer code. Force unwrapping is more prone to lead to runtime crashes.
 
-#### Avoid Using Implicitly Unwrapped Optionals
+####Implicitly Unwrapped Optionals
 
-Where possible, use `let foo: FooType?` instead of `let foo: FooType!` if `foo` may be nil (Note that in general, `?` can be used instead of `!`).
+Implicitly unwrapped optionals have the potential to cause runtime crashes and should be used carefully. If a variable has the possibility of being `nil`, you should always declare it as an optional `?`.
+
+Implicitly unwrapped optionals may be used in situations where limitations prevent the use of a non-optional type, but will never be accessed without a value.
+
+If a variable is dependent on `self` and thus not settable during initialization, consider using a `lazy` variable.
+
+```Swift
+lazy var customObject: CustomObject = CustomObject(dataSource: self)
+```
 
 _Rationale:_ Explicit optionals result in safer code. Implicitly unwrapped optionals have the potential of crashing at runtime.
 
-#### Prefer implicit getters on read-only properties and subscripts
+####Getters
 
 When possible, omit the `get` keyword on read-only computed properties and
 read-only subscripts.
@@ -98,7 +144,7 @@ subscript(index: Int) -> T {
 
 _Rationale:_ The intent and meaning of the first version is clear, and results in less code.
 
-#### Always specify access control explicitly for top-level definitions
+####Access Control
 
 Top-level functions, types, and variables should always have explicit access control specifiers:
 
@@ -116,9 +162,23 @@ internal struct TheFez {
 }
 ```
 
+When dealing with functionality that relies on ObjC systems such as the target-selector pattern, one should still strive for appropriate access control.  This can be achieved through the `@objC` attribute.  
+
+**For Example:**
+
+```Swift
+@objc private func handleTap(tap: UITapGestureRecognizer)
+```
+
+**Not**
+
+```Swift
+public func handleTap(tap: UITapGestureRecognizer)
+```
+
 _Rationale:_ It's rarely appropriate for top-level definitions to be specifically `internal`, and being explicit ensures that careful thought goes into that decision. Within a definition, reusing the same access control specifier is just duplicative, and the default is usually reasonable.
 
-#### When specifying a type, always associate the colon with the identifier
+####Type Specifications
 
 When specifying the type of an identifier, always put the colon immediately
 after the identifier, followed by a space and then the type name.
@@ -129,6 +189,55 @@ class SmallBatchSustainableFairtrade: Coffee { ... }
 let timeToCoffee: NSTimeInterval = 2
 
 func makeCoffee(type: CoffeeType) -> Coffee { ... }
+
+func swap<T: Swappable>(inout a: T, inout b: T) { ... }
+```
+
+#####Closure Specifications
+
+It is preferable to associate a closure's type from the left hand side when possible.
+
+ **For example:**
+
+ ```Swift
+ let layout: (UIView, UIView) -> Void = { view1, view2 in
+   view1.center = view2.center
+   // ...
+ }
+ ```
+
+ **Not**
+
+```Swift
+let layout = { (view1: UIView, view2: UIView) in
+  view1.center = view2.center
+  // ...
+}
+```
+
+#####Type Inference
+
+Unless it impairs readability or understanding, it preferable to rely on Swift's type inference where appropriate.
+
+**For example:**
+
+```Swift
+let hello = "Hello"
+```
+
+**Not**
+
+```Swift
+let hello: String = "Hello"
+```
+
+This does not mean one should avoid those situations where an explicit type is required.
+
+**For example:**
+
+```Swift
+let padding: CGFloat = 20
+var hello: String? = "Hello"
 ```
 
 _Rationale:_ The type specifier is saying something about the _identifier_ so
@@ -141,7 +250,7 @@ after the key type, followed by a space and then the value type.
 let capitals: [Country: City] = [ Sweden: Stockholm ]
 ```
 
-#### Only explicitly refer to `self` when required
+####Referring to `self`
 
 When accessing properties or methods on `self`, leave the reference to `self` implicit by default:
 
@@ -173,7 +282,7 @@ extension History {
 
 _Rationale:_ This makes the capturing semantics of `self` stand out more in closures, and avoids verbosity elsewhere.
 
-#### Prefer structs over classes
+####Structs vs Classes
 
 Unless you require functionality that can only be provided by a class (like identity or deinitializers), implement a struct instead.
 
@@ -214,8 +323,10 @@ protocol Vehicle {
     var numberOfWheels: Int { get }
 }
 
-func maximumTotalTirePressure(vehicle: Vehicle, pressurePerWheel: Float) -> Float {
-    return pressurePerWheel * Float(vehicle.numberOfWheels)
+extension Vehicle {
+    func maximumTotalTirePressure(pressurePerWheel: Float) -> Float {
+        return pressurePerWheel * Float(numberOfWheels)
+    }  
 }
 
 struct Bicycle: Vehicle {
@@ -235,21 +346,11 @@ Classes should start as `final`, and only be changed to allow subclassing if a v
 
 _Rationale:_ Composition is usually preferable to inheritance, and opting _in_ to inheritance hopefully means that more thought will be put into the decision.
 
+####Parameterized Types
 
-#### Omit type parameters where possible
+Methods of parameterized types can omit type parameters on the receiving type when they’re identical to the receiver’s.
 
-Methods of parameterized types can omit type parameters on the receiving type when they’re identical to the receiver’s. For example:
-
-```swift
-struct Composite<T> {
-	…
-	func compose(other: Composite<T>) -> Composite<T> {
-		return Composite<T>(self, other)
-	}
-}
-```
-
-could be rendered as:
+**For example:**
 
 ```swift
 struct Composite<T> {
@@ -260,28 +361,98 @@ struct Composite<T> {
 }
 ```
 
-_Rationale:_ Omitting redundant type parameters clarifies the intent, and makes it obvious by contrast when the returned type takes different type parameters.
-
-#### Use whitespace around operator definitions
-
-Use whitespace around operators when defining them. Instead of:
+**Not**
 
 ```swift
-func <|(lhs: Int, rhs: Int) -> Int
-func <|<<A>(lhs: A, rhs: A) -> A
+struct Composite<T> {
+	…
+	func compose(other: Composite<T>) -> Composite<T> {
+		return Composite<T>(self, other)
+	}
+}
 ```
 
-write:
+_Rationale:_ Omitting redundant type parameters clarifies the intent, and makes it obvious by contrast when the returned type takes different type parameters.
+
+####Operator Definitions
+
+Use whitespace around operators when defining them.
+
+**For example:**
 
 ```swift
 func <| (lhs: Int, rhs: Int) -> Int
 func <|< <A>(lhs: A, rhs: A) -> A
 ```
 
+**Not**
+
+```swift
+func <|(lhs: Int, rhs: Int) -> Int
+func <|<<A>(lhs: A, rhs: A) -> A
+```
+
 _Rationale:_ Operators consist of punctuation characters, which can make them difficult to read when immediately followed by the punctuation for a type or value parameter list. Adding whitespace separates the two more clearly.
 
-#### Translations
+####Functions
 
-* [中文版](https://github.com/Artwalk/swift-style-guide/blob/master/README_CN.md)
-* [日本語版](https://github.com/jarinosuke/swift-style-guide/blob/master/README_JP.md)
-* [한국어판](https://github.com/minsOne/swift-style-guide/blob/master/README_KR.md)
+Specifications around the preferable syntax to use when declaring, and using functions.
+
+#####Declarations
+
+When declaring a function, external parameters are always preferable.  Functions that don't include the first argument in the name should declare a first argument explicitly.
+
+**For example:**
+
+```Swift
+func moveView(view: UIView, toFrame frame: CGRect)
+```
+
+**Not**
+
+```Swift
+func move(view: UIView, _ frame: CGRect)
+```
+
+#####Calling
+
+... some specifications on calling functions
+
+- Avoid declaring large arguments inline
+- For functions with many argument, specify each arg on new line and `)` on final line
+- Use trailing closure syntax for simple functions
+- Avoid trailing closures at the end of functions with many arguments.  (3+)?
+
+
+####Closures
+
+Shorthand argument syntax should only be used in closures that can be understood in a few lines.  In other situations, declaring a variable that helps identify the underlying value is preferred.
+
+**For example:**
+
+```Swift
+doSomethingWithCompletion() { result in
+  // do things with result
+  switch result {
+    // ...
+  }
+}
+```
+
+**Not**
+
+```Swift
+doSomethingWithCompletion() {
+  // do things with result
+  switch $0 {
+    // ...
+  }
+}
+```
+
+Using shorthand syntax is preferable in situations where the arguments are well understood and can be expressed in a few lines.
+
+
+```Swift
+let sortedNames = names.sort { $0 < $1 }
+```
