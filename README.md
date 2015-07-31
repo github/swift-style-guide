@@ -93,22 +93,6 @@ if let foo = foo {
 }
 ```
 
-When dealing with `weak` or optional delegates, optional binding syntax is always preferable unless functionality is dependent on that value being unwrapped.
-
-**For Example:**
-
-```Swift
-delegate?.doSomething(self)
-```
-
-**Not**
-
-```Swift
-if let delegate = self.delegate {
-  delegate.doSomething(self)
-}
-```
-
 _Rationale:_ Explicit `if let`-binding of optionals results in safer code. Force unwrapping is more prone to lead to runtime crashes.
 
 ####Implicitly Unwrapped Optionals
