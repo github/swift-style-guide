@@ -34,6 +34,28 @@ It becomes easier to reason about code. Had you used `var` while still making th
 
 Accordingly, whenever you see a `var` identifier being used, assume that it will change and ask yourself why.
 
+#### Use `guard` statements to exit early
+
+If you have to meet certain criteria to continue execution, prefer `guard` over `if`
+
+So, use this:
+```swift
+guard let foo = foo else {
+    return
+}
+// Use unwrapped `foo` value in here
+```
+Instead of this:
+```swift
+if let foo = foo {
+    // Use unwrapped `foo` value in here
+} else {
+    return
+}
+```
+
+_Rationale:_ Intention and criteria are clearly visible, leading to lower chance of programmer error
+
 #### Avoid Using Force-Unwrapping of Optionals
 
 If you have an identifier `foo` of type `FooType?` or `FooType!`, don't force-unwrap it to get to the underlying value (`foo!`) if possible.
