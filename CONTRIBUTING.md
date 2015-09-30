@@ -1,3 +1,6 @@
+This guide is primarily intended to be _descriptive_, detailing the usage
+that Swift developers at GitHub have arrived at in cases of disagreement.
+
 If you want to suggest a change or addition that will help accomplish
 [the goals](README.md) of this style guide, please open a pull request that:
 
