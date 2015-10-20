@@ -28,7 +28,7 @@ Use `let foo = …` over `var foo = …` wherever possible (and when in doubt). 
 
 _Rationale:_ The intent and meaning of both keywords is clear, but *let-by-default* results in safer and clearer code.
 
-A `let`-binding guarantees and *clearly signals to the programmer* that its value is supposed to and will never change. Subsequent code can thus make stronger assumptions about its usage.
+A `let`-binding guarantees and *clearly signals to the programmer* that its value will never change. Subsequent code can thus make stronger assumptions about its usage.
 
 It becomes easier to reason about code. Had you used `var` while still making the assumption that the value never changed, you would have to manually check that.
 
