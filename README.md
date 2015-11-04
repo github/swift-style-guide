@@ -34,27 +34,27 @@ It becomes easier to reason about code. Had you used `var` while still making th
 
 Accordingly, whenever you see a `var` identifier being used, assume that it will change and ask yourself why.
 
-#### Use `guard` statements to exit early
+### Return and break early
 
-If you have to meet certain criteria to continue execution, prefer `guard` over `if`
+When you have to meet certain criteria to continue execution, try to exit early. So, instead of this:
 
-So, use this:
 ```swift
-guard let foo = foo else {
-    return
-}
-// Use unwrapped `foo` value in here
-```
-Instead of this:
-```swift
-if let foo = foo {
-    // Use unwrapped `foo` value in here
+if n.isNumber {
+    // Use n here
 } else {
     return
 }
 ```
 
-_Rationale:_ Intention and criteria are clearly visible, leading to lower chance of programmer error
+use this:
+```swift
+guard n.isNumber else {
+    return
+}
+// Use n here
+```
+
+You can also do it with `if` statement, but using `guard` is prefered, because `guard` statement without `return`, `break` or `continue` produces a compile-time error, so exit is guaranteed.
 
 #### Avoid Using Force-Unwrapping of Optionals
 
@@ -94,7 +94,7 @@ So, write these:
 
 ```swift
 var myGreatProperty: Int {
-	return 4
+    return 4
 }
 
 subscript(index: Int) -> T {
@@ -106,9 +106,9 @@ subscript(index: Int) -> T {
 
 ```swift
 var myGreatProperty: Int {
-	get {
-		return 4
-	}
+    get {
+        return 4
+    }
 }
 
 subscript(index: Int) -> T {
@@ -134,7 +134,7 @@ However, definitions within those can leave access control implicit, where appro
 
 ```swift
 internal struct TheFez {
-	var owner: Person = Joshaber()
+    var owner: Person = Joshaber()
 }
 ```
 
@@ -169,11 +169,11 @@ When accessing properties or methods on `self`, leave the reference to `self` im
 
 ```swift
 private class History {
-	var events: [Event]
+    var events: [Event]
 
-	func rewrite() {
-		events = []
-	}
+    func rewrite() {
+        events = []
+    }
 }
 ```
 
@@ -181,15 +181,15 @@ Only include the explicit keyword when required by the language—for example, i
 
 ```swift
 extension History {
-	init(events: [Event]) {
-		self.events = events
-	}
+    init(events: [Event]) {
+        self.events = events
+    }
 
-	var whenVictorious: () -> () {
-		return {
-			self.rewrite()
-		}
-	}
+    var whenVictorious: () -> () {
+        return {
+            self.rewrite()
+        }
+    }
 }
 ```
 
@@ -264,10 +264,10 @@ Methods of parameterized types can omit type parameters on the receiving type wh
 
 ```swift
 struct Composite<T> {
-	…
-	func compose(other: Composite<T>) -> Composite<T> {
-		return Composite<T>(self, other)
-	}
+    …
+    func compose(other: Composite<T>) -> Composite<T> {
+        return Composite<T>(self, other)
+    }
 }
 ```
 
@@ -275,10 +275,10 @@ could be rendered as:
 
 ```swift
 struct Composite<T> {
-	…
-	func compose(other: Composite) -> Composite {
-		return Composite(self, other)
-	}
+    …
+    func compose(other: Composite) -> Composite {
+        return Composite(self, other)
+    }
 }
 ```
 
