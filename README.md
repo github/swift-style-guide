@@ -34,6 +34,29 @@ It becomes easier to reason about code. Had you used `var` while still making th
 
 Accordingly, whenever you see a `var` identifier being used, assume that it will change and ask yourself why.
 
+### Return and break early
+
+When you have to meet certain criteria to continue execution, try to exit early. So, instead of this:
+
+```swift
+if n.isNumber {
+    // Use n here
+} else {
+    return
+}
+```
+
+use this:
+```swift
+guard n.isNumber else {
+    return
+}
+// Use n here
+```
+
+You can also do it with `if` statement, but using `guard` is prefered, because `guard` statement without `return`, `break` or `continue` produces a compile-time error, so exit is guaranteed.
+
+
 #### Avoid Using Force-Unwrapping of Optionals
 
 If you have an identifier `foo` of type `FooType?` or `FooType!`, don't force-unwrap it to get to the underlying value (`foo!`) if possible.
