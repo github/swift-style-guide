@@ -243,11 +243,37 @@ var hello: String? = "Hello"
 _Rationale:_ The type specifier is saying something about the _identifier_ so
 it should be positioned with it.
 
-Also, when specifying the type of a dictionary, always put the colon immediately
-after the key type, followed by a space and then the value type.
+####Dictionaries
+
+When specifying the type of a dictionary, always leave spaces on either side of the colon.
+
+**For Example**
+
+```swift
+let capitals: [Country : City] = [Sweden : Stockholm]
+```
+
+**Not**
 
 ```swift
 let capitals: [Country: City] = [ Sweden: Stockholm ]
+```
+
+For literal dictionaries that exceed a single line, newline syntax is preferable:
+
+**For Example**
+
+```swift
+let capitals: [Country : City] = [
+    Sweden : Stockholm,
+    USA : WashingtonDC
+]
+```
+
+**Not**
+
+```swift
+let capitals: [Country : City] = [Sweden : Stockholm, USA : WashingtonDC]
 ```
 
 ####Referring to `self`
