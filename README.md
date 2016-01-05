@@ -35,7 +35,7 @@ rough priority order):
 
 ####Whitespace
 
- * Tabs, not spaces.
+ * Indent using 4 spaces. Never indent with tabs. Be sure to set this preference in Xcode.
  * End files with a newline.
  * Make liberal use of vertical whitespace to divide code into logical chunks.
  * Don’t leave trailing whitespace.
