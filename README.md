@@ -102,21 +102,9 @@ Optional chaining in Swift is similar to messaging `nil` in Objective-C, but in 
 
 Use optional chaining if you want to assign a value to a property on an optional and you don’t plan on taking any alternative action if that optional is `nil`.
 
-**For Example:**
-
 ```Swift
-let cell: YourCell = tableView.ip_dequeuCell(indexPath)
+let cell: YourCell = tableView.ip_dequeueCell(indexPath)
 cell.label?.text = “Hello World”
-return cell
-```
-
-**Not**
-
-```Swift
-let cell: YourCell = tableView.ip_dequeuCell(indexPath)
-if let label = cell.textLabel {
-    label.text = "Hello World"
-}
 return cell
 ```
 
