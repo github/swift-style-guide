@@ -98,9 +98,9 @@ _Rationale:_ Explicit `if let`-binding of optionals results in safer code. Force
 
 ####Optional Chaining
 
-Optional chaining in Swift is similar to messaging nil in Objective-C, but in a way that works for any type, and that can be checked for success or failure.
+Optional chaining in Swift is similar to messaging `nil` in Objective-C, but in a way that works for any type, and that can be checked for success or failure.
 
-Use optional chaining if you want to assign a value to a property on an optional and you don’t plan on taking any alternative action if that optional is nil.
+Use optional chaining if you want to assign a value to a property on an optional and you don’t plan on taking any alternative action if that optional is `nil`.
 
 **For Example:**
 
