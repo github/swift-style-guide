@@ -23,6 +23,7 @@ rough priority order):
 * [Code Grouping](#code-crouping)
 * [Let vs Var](#let-vs-var)
 * [Force-Unwrapping of Optionals](#force-unwrapping-of-optionals)
+* [Optional Chaining](#optional-chaining)
 * [Implicitly Unwrapped Optionals](#implicitly-unwrapped-optionals)
 * [Getters](#getters)
 * [Access Control](#access-control)
@@ -79,7 +80,7 @@ It becomes easier to reason about code. Had you used `var` while still making th
 
 Accordingly, whenever you see a `var` identifier being used, assume that it will change and ask yourself why.
 
-#### Force-Unwrapping of Optionals
+####Force-Unwrapping of Optionals
 
 If you have an identifier `foo` of type `FooType?` or `FooType!`, don't force-unwrap it to get to the underlying value (`foo!`) if possible.
 
@@ -94,6 +95,32 @@ if let foo = foo {
 ```
 
 _Rationale:_ Explicit `if let`-binding of optionals results in safer code. Force unwrapping is more prone to lead to runtime crashes.
+
+####Optional Chaining
+
+Optional chaining in Swift is similar to messaging nil in Objective-C, but in a way that works for any type, and that can be checked for success or failure.
+
+Use optional chaining if you want to assign a value to a property on an optional and you don’t plan on taking any alternative action if that optional is nil.
+
+**For Example:**
+
+```Swift
+let cell: YourCell = tableView.ip_dequeuCell(indexPath)
+cell.label?.text = “Hello World”
+return cell
+```
+
+**Not**
+
+```Swift
+let cell: YourCell = tableView.ip_dequeuCell(indexPath)
+if let label = cell.textLabel {
+    label.text = "Hello World"
+}
+return cell
+```
+
+_Rationale:_ The use of optional binding here is overkill.
 
 ####Implicitly Unwrapped Optionals
 
