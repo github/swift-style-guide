@@ -196,6 +196,42 @@ extension History {
 
 _Rationale:_ This makes the capturing semantics of `self` stand out more in closures, and avoids verbosity elsewhere.
 
+#### Avoid enclosing conditions or loop variables in parentheses
+
+When writing conditionals or loops, avoid using paretheses around your conditions or loop variables. Instead of:
+
+```swift
+if (eventDidOccur) {
+    // do something
+}
+```
+
+write:
+
+```swift
+if eventDidOccur {
+    // do something
+}
+```
+
+and instead of:
+
+```swift
+for (var i = 0; i < 1; i++) {
+    // do something
+}
+```
+
+write:
+
+```swift
+for var i = 0; i < 1; i++ {
+    // do something
+}
+```
+
+_Rationale:_ This results in conditionals and loops that are more human readable and makes it clear that if parentheses are used, it is to achieve a specific evaluation order.
+
 #### Prefer structs over classes
 
 Unless you require functionality that can only be provided by a class (like identity or deinitializers), implement a struct instead.
