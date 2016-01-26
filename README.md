@@ -217,7 +217,7 @@ if eventDidOccur {
 and instead of:
 
 ```swift
-for (var i = 0; i < 1; i++) {
+for (thing in setOfThings) {
     // do something
 }
 ```
@@ -225,7 +225,7 @@ for (var i = 0; i < 1; i++) {
 write:
 
 ```swift
-for var i = 0; i < 1; i++ {
+for thing in setOfThings {
     // do something
 }
 ```
