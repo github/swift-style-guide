@@ -32,6 +32,7 @@ rough priority order):
 * [Parameterized Types](#parameterized-types)
 * [Operator Definitions](#operator-definitions)
 * [Functions](#functions)
+* [Closures](#closures)
 
 ####Whitespace
 
