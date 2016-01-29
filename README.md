@@ -20,19 +20,20 @@ rough priority order):
 ###Table Of Contents
 
 * [Whitespace](#whitespace)
-* [Code Grouping](#code-crouping)
+* [Code Grouping](#code-grouping)
 * [Let vs Var](#let-vs-var)
 * [Force-Unwrapping of Optionals](#force-unwrapping-of-optionals)
 * [Optional Chaining](#optional-chaining)
 * [Implicitly Unwrapped Optionals](#implicitly-unwrapped-optionals)
 * [Getters](#getters)
 * [Access Control](#access-control)
-* [Type Specifications](#type-specification)
+* [Type Specifications](#type-specifications)
 * [Referring to self](#referring-to-self)
 * [Structs vs Classes](#structs-vs-classes)
 * [Parameterized Types](#parameterized-types)
 * [Operator Definitions](#operator-definitions)
 * [Functions](#functions)
+* [Closures](#closures)
 
 ####Whitespace
 
@@ -493,7 +494,50 @@ doSomethingWithCompletion() {
 
 Using shorthand syntax is preferable in situations where the arguments are well understood and can be expressed in a few lines.
 
-
 ```Swift
 let sortedNames = names.sort { $0 < $1 }
+```
+####Trailing Closures
+
+Use trailing closure syntax only if there's a single closure expression parameter at the end of the argument list.
+
+**For example:**
+```swift
+UIView.animateWithDuration(1.0) {
+  self.myView.alpha = 0
+}
+```
+
+**Not**
+```swift
+UIView.animateWithDuration(1.0, animations: {
+  self.myView.alpha = 0
+})
+```
+
+####Multiple Closures
+
+When a function takes multiple closures as arguments it can be difficult to read. To keep it clean, use a new line for each argument and avoid trailing closures. If you're not going to use the variable from the closure input, name it with an underscore `_`.
+
+**For example:**
+```swift
+UIView.animateWithDuration(
+    SomeTimeValue,
+    animations: {
+        // Do stuff
+    },
+    completion: { _ in
+        // Do stuff
+    }
+)
+```
+**Not**
+
+(Even though the default spacing and syntax when you do this in xcode might end up looking like this)
+```swift
+UIView.animateWithDuration(SomeTimeValue, animations: {
+    // Do stuff
+    }) { complete in
+        // Do stuff
+}
 ```
