@@ -482,9 +482,27 @@ Using shorthand syntax is preferable in situations where the arguments are well 
 ```Swift
 let sortedNames = names.sort { $0 < $1 }
 ```
+####Trailing Closures
+
+Use trailing closure syntax only if there's a single closure expression parameter at the end of the argument list.
+
+**For example:**
+```swift
+UIView.animateWithDuration(1.0) {
+  self.myView.alpha = 0
+}
+```
+
+**Not**
+```swift
+UIView.animateWithDuration(1.0, animations: {
+  self.myView.alpha = 0
+})
+```
+
 ####Multiple Closures
 
-When a function takes multiple closures as arguments it can be difficult to read. To keep it clean, use a new line for each argument and avoid trailing closures.
+When a function takes multiple closures as arguments it can be difficult to read. To keep it clean, use a new line for each argument and avoid trailing closures. If you're not going to use the variable from the closure input, name it with an underscore `_`.
 
 **For example:**
 ```swift
@@ -504,7 +522,7 @@ UIView.animateWithDuration(
 ```swift
 UIView.animateWithDuration(SomeTimeValue, animations: {
     // Do stuff
-    }) { _ in
+    }) { complete in
         // Do stuff
 }
 ```
