@@ -21,7 +21,6 @@ then open a pull request. :zap:
  * Don’t leave trailing whitespace.
    * Not even leading indentation on blank lines.
 
-
 #### Prefer `let`-bindings over `var`-bindings wherever possible
 
 Use `let foo = …` over `var foo = …` wherever possible (and when in doubt). Only use `var` if you absolutely have to (i.e. you *know* that the value might change, e.g. when using the `weak` storage modifier).
@@ -34,7 +33,7 @@ It becomes easier to reason about code. Had you used `var` while still making th
 
 Accordingly, whenever you see a `var` identifier being used, assume that it will change and ask yourself why.
 
-### Return and break early
+#### Return and break early
 
 When you have to meet certain criteria to continue execution, try to exit early. So, instead of this:
 
@@ -55,7 +54,6 @@ guard n.isNumber else {
 ```
 
 You can also do it with `if` statement, but using `guard` is prefered, because `guard` statement without `return`, `break` or `continue` produces a compile-time error, so exit is guaranteed.
-
 
 #### Avoid Using Force-Unwrapping of Optionals
 
