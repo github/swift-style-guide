@@ -53,7 +53,7 @@ guard n.isNumber else {
 // Use n here
 ```
 
-You can also do it with `if` statement, but using `guard` is prefered, because `guard` statement without `return`, `break` or `continue` produces a compile-time error, so exit is guaranteed.
+You can also do it with `if` statement, but using `guard` is preferred, because `guard` statement without `return`, `break` or `continue` produces a compile-time error, so exit is guaranteed.
 
 #### Avoid Using Force-Unwrapping of Optionals
 
