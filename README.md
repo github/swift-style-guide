@@ -22,9 +22,9 @@ This is not an outline of the style guide. _The outline is the style guide._ The
 *Clarity* means anything that will not affect the logic of the code. *Usage* refers to code usage choices.
 
 * [[I.]](#clarity) Clarity
-	* [[I.A.]](horizontal-whitespace) Horizontal Whitespace 
+	* [[I.A.]](#horizontal-whitespace) Horizontal Whitespace 
 		 * [I.A.1.] Tabs or spaces? Tabs
-		 * [[I.A.2.]](#don’t-leave-trailing-whitespace.) Don't leave trailing whitespace
+		 * [[I.A.2.]](#don’t-leave-trailing-whitespace) Don't leave trailing whitespace
 		 * [[I.A.3.]](#when-specifying-a-type-always-associate-the-colon-with-the-identifier) When specifying a type, always associate the colon with the identifier [[more]]
 		 * [[I.A.4.]](#use-whitespace-around-operator-definitions) Use whitespace around operator definitions
 
