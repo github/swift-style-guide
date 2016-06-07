@@ -40,7 +40,7 @@ This is not an outline of the style guide. _The outline is the style guide._ The
 		 
 * [[II.]](#usage) Usage 
 
- 	* [[II.A.]](#parameters-and-types) Types (//FIXME: Not correct heading)
+ 	* [[II.A.]](#parameters-and-types) Type
 		* [[II.A.1.]](#prefer-let-bindings-over-var-bindings-wherever-possible) Prefer `let`-bindings over `var`-bindings wherever possible
 		* [[II.A.3.]](#prefer-structs-over-classes) Prefer structs over classes
 		* [[II.A.4.]](#make-classes-final-by-default) Make classes `final` by default
