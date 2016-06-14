@@ -25,7 +25,7 @@ then open a pull request. :zap:
 
 Use `let foo = …` over `var foo = …` wherever possible (and when in doubt). Only use `var` if you absolutely have to (i.e. you *know* that the value might change, e.g. when using the `weak` storage modifier).
 
-_Rationale:_ The intent and meaning of both keywords is clear, but *let-by-default* results in safer and clearer code.
+_Rationale:_ The intent and meaning of both keywords are clear, but *let-by-default* results in safer and clearer code.
 
 A `let`-binding guarantees and *clearly signals to the programmer* that its value will never change. Subsequent code can thus make stronger assumptions about its usage.
 
@@ -117,7 +117,7 @@ subscript(index: Int) -> T {
 }
 ```
 
-_Rationale:_ The intent and meaning of the first version is clear, and results in less code.
+_Rationale:_ The intent and meaning of the first version are clear, and results in less code.
 
 #### Always specify access control explicitly for top-level definitions
 
