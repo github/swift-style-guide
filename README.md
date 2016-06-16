@@ -1,4 +1,4 @@
-# MikeSand Organized
+# MikeSand Swift Style Guide
 
 ## Style Guide Outline
 
