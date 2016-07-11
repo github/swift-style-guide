@@ -19,6 +19,7 @@ rough priority order):
 
 ###Table Of Contents
 
+* [Swiftclean Config](SwiftStyleSettings.plist)
 * [Whitespace](#whitespace)
 * [Code Grouping](#code-grouping)
 * [Let vs Var](#let-vs-var)
