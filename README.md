@@ -35,6 +35,7 @@ rough priority order):
 * [Operator Definitions](#operator-definitions)
 * [Functions](#functions)
 * [Closures](#closures)
+* [Enums](#enums)
 
 ####Whitespace
 
@@ -457,6 +458,25 @@ func moveView(view: UIView, toFrame frame: CGRect)
 func move(view: UIView, _ frame: CGRect)
 ```
 
+#####Parameter Names
+
+With Swift 3, first parameter labels are now considered default. This means that you will no longer need to worry about doubling up the parameter name if you want it to be exposed to callers.
+
+**Swift 3**
+
+```Swift
+func foo(x: Int, y: Int)
+// Callers will see foo(x: Int, y: Int)
+```
+
+**Swift 2**
+
+```Swift
+func foo(x: Int, y: Int)
+// Callers will see foo(_: Int, y: Int)
+```
+
+
 #####Calling
 
 ... some specifications on calling functions
@@ -540,5 +560,59 @@ UIView.animateWithDuration(SomeTimeValue, animations: {
     // Do stuff
     }) { complete in
         // Do stuff
+}
+```
+
+##Enums
+
+###Naming
+Enum cases should be defined in `camelCase` with leading lowercase letters. This is counter to Swift 2.x where uppercase was preferred. The rationale for this is that uppercase syntax should be reserved for typed declarations only.
+
+#####Like This
+
+```Swift
+enum Directions {
+    case north
+    case south
+    case east
+    case west
+}
+```
+
+######Not This
+
+```Swift
+enum Directions {
+    case North
+    case South
+    case East
+    case West
+}
+```
+
+###Dot Notation
+Enums must be checked with `.` notation whenever they were used. In Swift 2.x it was possible to access enum cases without the `.` prefix
+
+#####Like This
+
+```Swift
+enum Coin {
+    case heads
+    case tails
+}
+func checkCoin() {
+    if coin == .heads { print("heads") }
+}
+```
+
+######Not This
+
+```Swift
+enum Coin {
+	case heads
+	case tails
+}
+func checkCoin() {
+	if coin == heads { print("heads") }
 }
 ```
