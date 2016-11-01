@@ -196,9 +196,9 @@ extension History {
 
 _Rationale:_ This makes the capturing semantics of `self` stand out more in closures, and avoids verbosity elsewhere.
 
-#### Avoid enclosing conditions or loop variables in parentheses
+#### Avoid enclosing conditions in parentheses
 
-When writing conditionals or loops, avoid using paretheses around your conditions or loop variables. Instead of:
+When writing conditionals, avoid using paretheses around your conditions. Instead of:
 
 ```swift
 if (eventDidOccur) {
@@ -214,23 +214,7 @@ if eventDidOccur {
 }
 ```
 
-and instead of:
-
-```swift
-for (element in someArray) {
-    // do something
-}
-```
-
-write:
-
-```swift
-for element in someArray {
-    // do something
-}
-```
-
-_Rationale:_ This results in conditionals and loops that are more human readable and makes it clear that if parentheses are used, it is to achieve a specific evaluation order.
+_Rationale:_ This results in conditionals that are more human readable and makes it clear that if parentheses are used, it is to achieve a specific evaluation order.
 
 #### Prefer structs over classes
 
