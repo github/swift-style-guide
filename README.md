@@ -159,7 +159,7 @@ Also, when specifying the type of a dictionary, always put the colon immediately
 after the key type, followed by a space and then the value type.
 
 ```swift
-let capitals: [Country: City] = [ Sweden: Stockholm ]
+let capitals: [Country: City] = [sweden: stockholm]
 ```
 
 #### Only explicitly refer to `self` when required
