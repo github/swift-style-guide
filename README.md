@@ -233,10 +233,13 @@ could be refactored into these definitions:
 ```swift
 protocol Vehicle {
     var numberOfWheels: Int { get }
+    func maximumTotalTirePressure(pressurePerWheel: Float) -> Float
 }
 
-func maximumTotalTirePressure(vehicle: Vehicle, pressurePerWheel: Float) -> Float {
-    return pressurePerWheel * Float(vehicle.numberOfWheels)
+extension Vehicle {
+    func maximumTotalTirePressure(pressurePerWheel: Float) -> Float {
+    	return pressurePerWheel * Float(numberOfWheels)
+    }
 }
 
 struct Bicycle: Vehicle {
