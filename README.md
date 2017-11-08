@@ -1,3 +1,7 @@
+# This repository is no longer active.
+
+----
+
 A guide to our Swift style and conventions.
 
 This is an attempt to encourage patterns that accomplish the following goals (in
