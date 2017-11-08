@@ -123,6 +123,37 @@ subscript(index: Int) -> T {
 
 _Rationale:_ The intent and meaning of the first version are clear, and results in less code.
 
+#### Avoid redundant type declarations
+
+When type information can be inferred from an initial value, avoid declaring it explicitly, unless doing so is an active decision to improve code legibility.
+
+```swift
+var isOnFire = false
+var referenceFrame = CGRect(x: 0, y: 0, width: 100, height: 100)
+```
+
+instead of:
+
+```swift
+var isOnFire: Bool = false
+var referenceFrame: CGRect = CGRect(x: 0, y: 0, width: 100, height: 100)
+```
+
+When type information _cannot_ be inferred from an initial value then it should be explicitly added to the declaration; you should not add type information to a constructor for the purpose of allowing type inference.
+
+```swift
+var lookupTable: [Int: String] = [:] 
+var duration: NSTimeInterval = 1.2
+```
+
+instead of:
+
+```swift
+var lookupTable = [Int: String]()
+var duration = NSTimeInterval(1.2)
+```
+_Rationale_: Avoiding redundant declarations results in shorter, easier to read code. 
+
 #### Always specify access control explicitly for top-level definitions
 
 Top-level functions, types, and variables should always have explicit access control specifiers:
